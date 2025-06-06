@@ -1,18 +1,19 @@
-// src/services/VectorStore.ts
+// src/services/VectorStore.service.ts
 
-import { EmbeddedChunk } from './Embeddings'
+import { injectable } from 'tsyringe'
+import { IVectorStoreService } from '../interfaces/services.interfaces'
+import { EmbeddedChunk, VectorStoreStats } from '../types'
 
-export class VectorStore {
-  private static instance: VectorStore
+@injectable()
+export class VectorStoreService implements IVectorStoreService {
+  private static instance: VectorStoreService
   private chunks: EmbeddedChunk[] = []
 
-  private constructor() {}
-
-  static getInstance(): VectorStore {
-    if (!VectorStore.instance) {
-      VectorStore.instance = new VectorStore()
+  constructor() {
+    if (VectorStoreService.instance) {
+      return VectorStoreService.instance
     }
-    return VectorStore.instance
+    VectorStoreService.instance = this
   }
 
   addChunks(chunks: EmbeddedChunk[]): void {
@@ -31,7 +32,7 @@ export class VectorStore {
     this.chunks = []
   }
 
-  getStats(): { totalChunks: number; sources: string[] } {
+  getStats(): VectorStoreStats {
     const sources = [
       ...new Set(
         this.chunks

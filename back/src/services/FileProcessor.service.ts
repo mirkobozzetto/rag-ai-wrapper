@@ -1,10 +1,13 @@
-// src/services/FileProcessor.ts
+// src/services/FileProcessor.service.ts
 
-export class FileProcessor {
-  static processText(
+import { IFileProcessorService } from '../interfaces/services.interfaces'
+import { ProcessedDocument } from '../types'
+
+export class FileProcessorService implements IFileProcessorService {
+  async processFile(
     buffer: Buffer,
     filename: string,
-  ): { content: string; metadata: any } {
+  ): Promise<ProcessedDocument> {
     const content = buffer.toString('utf-8')
     const extension = filename.split('.').pop()?.toLowerCase()
 
@@ -12,7 +15,7 @@ export class FileProcessor {
       content: content.trim(),
       metadata: {
         filename,
-        extension,
+        extension: extension || '',
         size: buffer.length,
         lines: content.split('\n').length,
         words: content.split(/\s+/).filter(word => word.length > 0).length,
@@ -21,7 +24,7 @@ export class FileProcessor {
     }
   }
 
-  static isValidFile(filename: string): boolean {
+  isValidFile(filename: string): boolean {
     const validExtensions = ['txt', 'md']
     const extension = filename.split('.').pop()?.toLowerCase()
     return validExtensions.includes(extension || '')

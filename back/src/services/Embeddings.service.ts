@@ -1,7 +1,7 @@
 // src/services/Embeddings.ts
 
 import OpenAI from 'openai'
-import { Chunk } from './TextChunker'
+import { Chunk } from './TextChunker.service'
 
 export interface EmbeddedChunk {
   id: string

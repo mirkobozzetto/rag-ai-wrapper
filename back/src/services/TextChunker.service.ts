@@ -1,19 +1,10 @@
-// src/services/TextChunker.ts
+// src/services/TextChunker.service.ts
 
-export interface Chunk {
-  id: string
-  content: string
-  metadata: {
-    index: number
-    startChar: number
-    endChar: number
-    wordCount: number
-    source?: string
-  }
-}
+import { ITextChunkerService } from '../interfaces/services.interfaces'
+import { Chunk } from '../types'
 
-export class TextChunker {
-  static chunk(
+export class TextChunkerService implements ITextChunkerService {
+  chunk(
     text: string,
     chunkSize: number = 500,
     overlap: number = 50,
@@ -57,14 +48,14 @@ export class TextChunker {
     return chunks
   }
 
-  private static splitIntoSentences(text: string): string[] {
+  private splitIntoSentences(text: string): string[] {
     return text
       .split(/[.!?]+/)
       .map(sentence => sentence.trim())
       .filter(sentence => sentence.length > 0)
   }
 
-  private static getOverlapText(text: string, overlapSize: number): string {
+  private getOverlapText(text: string, overlapSize: number): string {
     const words = text.split(' ')
     const overlapWords = Math.min(
       Math.floor(words.length * 0.3),
@@ -73,7 +64,7 @@ export class TextChunker {
     return words.slice(-overlapWords).join(' ')
   }
 
-  private static createChunk(
+  private createChunk(
     content: string,
     index: number,
     startChar: number,

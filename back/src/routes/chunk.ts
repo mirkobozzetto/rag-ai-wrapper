@@ -1,7 +1,7 @@
 // src/routes/chunk.ts
 
 import { Context, Hono } from 'hono'
-import { TextChunker } from '../services/TextChunker'
+import { TextChunker } from '../services/TextChunker.service'
 
 export class Chunk {
   private app = new Hono()

@@ -1,7 +1,7 @@
 // src/routes/ask.ts
 
 import { Context, Hono } from 'hono'
-import { RagService } from '../services/RagService'
+import { RagService } from '../services/RagService.service'
 
 export class Ask {
   private app = new Hono()

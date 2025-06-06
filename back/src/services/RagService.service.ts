@@ -1,10 +1,10 @@
 // src/services/RagService.ts
 
 import OpenAI from 'openai'
-import { EmbeddedChunk, EmbeddingService } from './Embeddings'
-import { FileProcessor } from './FileProcessor'
-import { TextChunker } from './TextChunker'
-import { VectorStore } from './VectorStore'
+import { EmbeddedChunk, EmbeddingService } from './Embeddings.service'
+import { TextChunker } from './TextChunker.service'
+import { VectorStore } from './VectorStore.service'
+import { FileProcessorService } from './FileProcessor.service'
 
 export class RagService {
   private embeddingService: EmbeddingService
@@ -27,7 +27,10 @@ export class RagService {
     chunks: number
     metadata: unknown
   }> {
-    const { content, metadata } = FileProcessor.processText(buffer, filename)
+    const { content, metadata } = FileProcessorService.processText(
+      buffer,
+      filename,
+    )
 
     const chunks = TextChunker.chunk(content, 500, 50, filename)
 

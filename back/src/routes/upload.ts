@@ -1,12 +1,14 @@
 // src/routes/upload.ts
 
 import { Context, Hono } from 'hono'
-import { FileProcessor } from '../services/FileProcessor'
+import { inject, injectable } from 'tsyringe'
+import { IRagService } from '../interfaces/services.interfaces'
 
+@injectable()
 export class Upload {
   private app = new Hono()
 
-  constructor() {
+  constructor(@inject('IRagService') private ragService: IRagService) {
     this.setupRoutes()
   }
 
@@ -23,23 +25,17 @@ export class Upload {
         return c.json({ error: 'No file provided' }, 400)
       }
 
-      if (!FileProcessor.isValidFile(file.name)) {
-        return c.json(
-          { error: 'Invalid file type. Only .txt and .md files are allowed' },
-          400,
-        )
-      }
-
       const buffer = Buffer.from(await file.arrayBuffer())
-      const result = FileProcessor.processText(buffer, file.name)
+      const result = await this.ragService.processDocument(buffer, file.name)
 
       return c.json({
         success: true,
+        message: 'Document processed and indexed',
         data: result,
       })
     } catch (error) {
       console.error('Upload error:', error)
-      return c.json({ error: 'Failed to process file' }, 500)
+      return c.json({ error: 'Failed to process document' }, 500)
     }
   }
 
