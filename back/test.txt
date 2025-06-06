@@ -1,0 +1,3 @@
+Ceci est un test pour le RAG wrapper
+
+What the fuck
