@@ -13,7 +13,9 @@
     "openai": "^5.1.1",
     "pdf-parse": "^1.1.1",
     "reflect-metadata": "^0.2.2",
-    "tsyringe": "^4.10.0"
+    "tsyringe": "^4.10.0",
+    "@hono/swagger-ui": "^0.5.1",
+    "@hono/zod-openapi": "^0.19.8"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
