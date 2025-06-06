@@ -1,6 +1,7 @@
 // src/interfaces/services.interfaces.ts
 
 import {
+  BookMetadata,
   Chunk,
   EmbeddedChunk,
   ProcessedDocument,
@@ -10,6 +11,7 @@ import {
 export interface IFileProcessorService {
   processFile(buffer: Buffer, filename: string): Promise<ProcessedDocument>
   isValidFile(filename: string): boolean
+  extractBookMetadata?(document: ProcessedDocument): BookMetadata
 }
 
 export interface ITextChunkerService {
@@ -19,6 +21,8 @@ export interface ITextChunkerService {
     overlap?: number,
     source?: string,
   ): Chunk[]
+  detectChapters?(text: string): string[]
+  chunkBySemanticStructure?(text: string, source?: string): Chunk[]
 }
 
 export interface IEmbeddingService {
@@ -48,6 +52,7 @@ export interface IRagService {
     filename: string
     chunks: number
     metadata: unknown
+    bookInfo?: BookMetadata
   }>
   askQuestion(question: string): Promise<{
     answer: string | null
@@ -55,7 +60,21 @@ export interface IRagService {
       filename?: string
       content: string
       similarity: number
+      page?: number
+      chapter?: string
     }>
+  }>
+  askAsAuthor?(
+    question: string,
+    authorPersona?: string,
+  ): Promise<{
+    answer: string | null
+    sources: Array<{
+      filename?: string
+      content: string
+      similarity: number
+    }>
+    persona: string
   }>
   getStats(): VectorStoreStats
 }

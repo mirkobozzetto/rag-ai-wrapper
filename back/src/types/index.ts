@@ -1,3 +1,5 @@
+// src/types/index.ts
+
 export type DocumentMetadata = {
   filename: string
   extension: string
@@ -5,17 +7,17 @@ export type DocumentMetadata = {
   lines: number
   words: number
   processedAt: string
+  pages?: number
+  title?: string
+  author?: string
+  creator?: string
+  subject?: string
+  keywords?: string
 }
 
 export type ProcessedDocument = {
   content: string
   metadata: DocumentMetadata
-}
-
-export type Chunk = {
-  id: string
-  content: string
-  metadata: ChunkMetadata
 }
 
 export type ChunkMetadata = {
@@ -24,6 +26,14 @@ export type ChunkMetadata = {
   endChar: number
   wordCount: number
   source?: string
+  page?: number
+  chapter?: string
+}
+
+export type Chunk = {
+  id: string
+  content: string
+  metadata: ChunkMetadata
 }
 
 export type EmbeddedChunk = {
@@ -42,4 +52,22 @@ export type ChunkingOptions = {
 export type VectorStoreStats = {
   totalChunks: number
   sources: string[]
+}
+
+export type BookMetadata = {
+  title?: string
+  author?: string
+  subject?: string
+  chapters?: string[]
+  language?: string
+  pageCount?: number
+}
+
+export type PDFInfo = {
+  pages: number
+  title?: string
+  author?: string
+  creator?: string
+  subject?: string
+  keywords?: string
 }
