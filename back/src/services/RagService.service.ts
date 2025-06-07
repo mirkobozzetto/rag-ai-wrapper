@@ -1,19 +1,27 @@
-// src/services/RagService.ts
+// src/services/RagService.service.ts
 
 import OpenAI from 'openai'
-import { EmbeddedChunk, EmbeddingService } from './Embeddings.service'
-import { TextChunker } from './TextChunker.service'
-import { VectorStore } from './VectorStore.service'
-import { FileProcessorService } from './FileProcessor.service'
+import { inject, injectable } from 'tsyringe'
+import {
+  IEmbeddingService,
+  IFileProcessorService,
+  IRagService,
+  ITextChunkerService,
+  IVectorStoreService,
+} from '../interfaces/services.interfaces'
+import { EmbeddedChunk, VectorStoreStats } from '../types'
 
-export class RagService {
-  private embeddingService: EmbeddingService
-  private vectorStore: VectorStore
+@injectable()
+export class RagService implements IRagService {
   private openai: OpenAI
 
-  constructor() {
-    this.embeddingService = new EmbeddingService()
-    this.vectorStore = VectorStore.getInstance()
+  constructor(
+    @inject('IFileProcessorService')
+    private fileProcessor: IFileProcessorService,
+    @inject('ITextChunkerService') private textChunker: ITextChunkerService,
+    @inject('IEmbeddingService') private embeddingService: IEmbeddingService,
+    @inject('IVectorStoreService') private vectorStore: IVectorStoreService,
+  ) {
     this.openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY!,
     })
@@ -27,12 +35,12 @@ export class RagService {
     chunks: number
     metadata: unknown
   }> {
-    const { content, metadata } = FileProcessorService.processText(
+    const { content, metadata } = await this.fileProcessor.processFile(
       buffer,
       filename,
     )
 
-    const chunks = TextChunker.chunk(content, 500, 50, filename)
+    const chunks = this.textChunker.chunk(content, 500, 50, filename)
 
     const embeddedChunks = await this.embeddingService.embedChunks(chunks)
 
@@ -45,7 +53,14 @@ export class RagService {
     }
   }
 
-  async askQuestion(question: string): Promise<any> {
+  async askQuestion(question: string): Promise<{
+    answer: string | null
+    sources: Array<{
+      filename?: string
+      content: string
+      similarity: number
+    }>
+  }> {
     const allChunks = this.vectorStore.getAllChunks()
 
     if (allChunks.length === 0) {
@@ -90,7 +105,7 @@ export class RagService {
     }
   }
 
-  getStats(): { totalChunks: number; sources: string[] } {
+  getStats(): VectorStoreStats {
     return this.vectorStore.getStats()
   }
 }

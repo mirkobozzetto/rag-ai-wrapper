@@ -1,12 +1,16 @@
 // src/routes/chunk.ts
 
 import { Context, Hono } from 'hono'
-import { TextChunker } from '../services/TextChunker.service'
+import { inject, injectable } from 'tsyringe'
+import { ITextChunkerService } from '../interfaces/services.interfaces'
 
+@injectable()
 export class Chunk {
   private app = new Hono()
 
-  constructor() {
+  constructor(
+    @inject('ITextChunkerService') private textChunker: ITextChunkerService,
+  ) {
     this.setupRoutes()
   }
 
@@ -27,7 +31,7 @@ export class Chunk {
         return c.json({ error: 'Text cannot be empty' }, 400)
       }
 
-      const chunks = TextChunker.chunk(text, chunkSize, overlap, source)
+      const chunks = this.textChunker.chunk(text, chunkSize, overlap, source)
 
       return c.json({
         success: true,

@@ -1,14 +1,14 @@
 // src/routes/ask.ts
 
 import { Context, Hono } from 'hono'
-import { RagService } from '../services/RagService.service'
+import { inject, injectable } from 'tsyringe'
+import { IRagService } from '../interfaces/services.interfaces'
 
+@injectable()
 export class Ask {
   private app = new Hono()
-  private ragService: RagService
 
-  constructor() {
-    this.ragService = new RagService()
+  constructor(@inject('IRagService') private ragService: IRagService) {
     this.setupRoutes()
   }
 

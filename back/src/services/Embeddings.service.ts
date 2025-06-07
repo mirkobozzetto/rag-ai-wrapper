@@ -1,16 +1,12 @@
-// src/services/Embeddings.ts
+// src/services/Embeddings.service.ts
 
 import OpenAI from 'openai'
-import { Chunk } from './TextChunker.service'
+import { injectable } from 'tsyringe'
+import { IEmbeddingService } from '../interfaces/services.interfaces'
+import { Chunk, EmbeddedChunk } from '../types'
 
-export interface EmbeddedChunk {
-  id: string
-  content: string
-  embedding: number[]
-  metadata: Chunk['metadata']
-}
-
-export class EmbeddingService {
+@injectable()
+export class EmbeddingService implements IEmbeddingService {
   private openai: OpenAI
 
   constructor() {
