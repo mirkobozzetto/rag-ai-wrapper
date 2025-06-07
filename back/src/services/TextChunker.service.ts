@@ -1,8 +1,10 @@
 // src/services/TextChunker.service.ts
 
+import { injectable } from 'tsyringe'
 import { ITextChunkerService } from '../interfaces/services.interfaces'
 import { Chunk } from '../types'
 
+@injectable()
 export class TextChunkerService implements ITextChunkerService {
   chunk(
     text: string,

@@ -1,14 +1,15 @@
 // src/routes/upload.ts
 
 import { Context, Hono } from 'hono'
-import { inject, injectable } from 'tsyringe'
+import { container } from 'tsyringe'
 import { IRagService } from '../interfaces/services.interfaces'
 
-@injectable()
 export class Upload {
   private app = new Hono()
+  private ragService: IRagService
 
-  constructor(@inject('IRagService') private ragService: IRagService) {
+  constructor() {
+    this.ragService = container.resolve<IRagService>('IRagService')
     this.setupRoutes()
   }
 

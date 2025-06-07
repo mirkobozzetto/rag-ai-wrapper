@@ -1,9 +1,9 @@
+// src/index.ts
+
 import { serve } from '@hono/node-server'
 import { config } from 'dotenv'
 import { Hono } from 'hono'
 import 'reflect-metadata'
-import { container } from 'tsyringe'
-
 import { setupContainer } from './container'
 import { Ask } from './routes/ask'
 import { Chunk } from './routes/chunk'
@@ -18,9 +18,9 @@ app.get('/', c => {
   return c.text('RAG Wrapper API Ready!')
 })
 
-app.route('/upload', container.resolve(Upload).getRouter())
-app.route('/ask', container.resolve(Ask).getRouter())
-app.route('/chunk', container.resolve(Chunk).getRouter())
+app.route('/upload', new Upload().getRouter())
+app.route('/ask', new Ask().getRouter())
+app.route('/chunk', new Chunk().getRouter())
 
 serve(
   {

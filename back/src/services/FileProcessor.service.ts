@@ -1,9 +1,10 @@
 // src/services/FileProcessor.service.ts
 
-import pdf from 'pdf-parse'
+import { injectable } from 'tsyringe'
 import { IFileProcessorService } from '../interfaces/services.interfaces'
 import { PDFInfo, ProcessedDocument } from '../types'
 
+@injectable()
 export class FileProcessorService implements IFileProcessorService {
   async processFile(
     buffer: Buffer,
@@ -16,15 +17,26 @@ export class FileProcessorService implements IFileProcessorService {
 
     switch (extension) {
       case 'pdf':
-        const pdfData = await pdf(buffer)
-        content = pdfData.text
-        additionalMetadata = {
-          pages: pdfData.numpages,
-          title: pdfData.info?.Title || undefined,
-          author: pdfData.info?.Author || undefined,
-          creator: pdfData.info?.Creator || undefined,
-          subject: pdfData.info?.Subject || undefined,
-          keywords: pdfData.info?.Keywords || undefined,
+        try {
+          const pdfParse = await import('pdf-parse')
+          const pdf = pdfParse.default || pdfParse
+          const pdfData = await pdf(buffer)
+          content = pdfData.text
+          additionalMetadata = {
+            pages: pdfData.numpages,
+            title: pdfData.info?.Title || undefined,
+            author: pdfData.info?.Author || undefined,
+            creator: pdfData.info?.Creator || undefined,
+            subject: pdfData.info?.Subject || undefined,
+            keywords: pdfData.info?.Keywords || undefined,
+          }
+        } catch (error) {
+          console.error('PDF parsing error:', error)
+          throw new Error(
+            `Failed to parse PDF: ${
+              error instanceof Error ? error.message : 'Unknown error'
+            }`,
+          )
         }
         break
       case 'txt':

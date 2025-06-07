@@ -1,16 +1,17 @@
 // src/routes/chunk.ts
 
 import { Context, Hono } from 'hono'
-import { inject, injectable } from 'tsyringe'
+import { container } from 'tsyringe'
 import { ITextChunkerService } from '../interfaces/services.interfaces'
 
-@injectable()
 export class Chunk {
   private app = new Hono()
+  private textChunker: ITextChunkerService
 
-  constructor(
-    @inject('ITextChunkerService') private textChunker: ITextChunkerService,
-  ) {
+  constructor() {
+    this.textChunker = container.resolve<ITextChunkerService>(
+      'ITextChunkerService',
+    )
     this.setupRoutes()
   }
 
