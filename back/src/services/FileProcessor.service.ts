@@ -18,7 +18,8 @@ export class FileProcessorService implements IFileProcessorService {
     switch (extension) {
       case 'pdf':
         try {
-          const pdfParse = await import('pdf-parse')
+          // @ts-ignore
+          const pdfParse = await import('pdf-parse/lib/pdf-parse.js')
           const pdf = pdfParse.default || pdfParse
           const pdfData = await pdf(buffer)
           content = pdfData.text

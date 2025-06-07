@@ -8,18 +8,19 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.14.3",
+    "@hono/swagger-ui": "^0.5.1",
+    "@hono/zod-openapi": "^0.19.8",
     "dotenv": "^16.5.0",
     "hono": "^4.7.11",
     "openai": "^5.1.1",
     "pdf-parse": "^1.1.1",
     "reflect-metadata": "^0.2.2",
-    "tsyringe": "^4.10.0",
-    "@hono/swagger-ui": "^0.5.1",
-    "@hono/zod-openapi": "^0.19.8"
+    "tsyringe": "^4.10.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
     "@types/pdf-parse": "^1.1.5",
+    "@types/pdfjs-dist": "^2.10.378",
     "tsx": "^4.7.1",
     "typescript": "^5.8.3"
   }
