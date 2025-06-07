@@ -39,15 +39,15 @@ Designed to work with multiple AI providers and vector databases. Switch between
 ## Architecture
 
 ```
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐
-│   Upload    │───▶│   Chunking   │───▶│   Vector    │
-│  Documents  │    │  & Metadata  │    │   Storage   │
-└─────────────┘    └──────────────┘    └─────────────┘
-                                              │
-┌─────────────┐    ┌──────────────┐          │
-│   Query     │◀───│  AI Response │◀─────────┘
-│  Interface  │    │  Generation  │
-└─────────────┘    └──────────────┘
+┌─────────────┐     ┌──────────────┐      ┌──────────────┐
+│   Upload    │───▶│   Chunking   │─────▶│   Vector     │
+│  Documents  │     │  & Metadata  │      │   Storage    │
+└─────────────┘     └──────────────┘      └──────────────┘
+                                                 │
+┌─────────────┐     ┌───────────────┐            │
+│   Query     │◀───│  AI Response   │◀──────────┘
+│  Interface  │     │  Generation   │
+└─────────────┘     └───────────────┘
 ```
 
 This project bridges the gap between complex RAG frameworks and simple chatbot APIs, providing the perfect balance of power and simplicity for modern AI applications.
