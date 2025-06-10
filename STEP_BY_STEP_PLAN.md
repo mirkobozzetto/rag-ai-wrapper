@@ -46,7 +46,7 @@ requires-python = ">=3.12"
 
 dependencies = [
     "fastapi>=0.104.0",
-    "uvicorn>=0.24.0",
+    "hypercorn>=0.16.0",
     "pydantic>=2.0.0",
 ]
 
@@ -88,8 +88,12 @@ async def health():
     return {"status": "healthy"}
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import hypercorn.asyncio
+    import hypercorn.config
+
+    config = hypercorn.config.Config()
+    config.bind = ["0.0.0.0:8000"]
+    hypercorn.asyncio.serve(app, config)
 ```
 
 ### Step 4: Test basic setup

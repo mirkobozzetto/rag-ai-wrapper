@@ -130,7 +130,7 @@ rag-project/
 2. **Install dependencies:**
 
    ```bash
-   uv add fastapi uvicorn langchain qdrant-client fastembed pydantic
+   uv add fastapi hypercorn langchain qdrant-client fastembed pydantic
    uv add --dev pytest pytest-asyncio black ruff mypy
    ```
 
