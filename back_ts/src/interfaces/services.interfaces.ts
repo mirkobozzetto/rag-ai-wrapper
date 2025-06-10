@@ -37,11 +37,11 @@ export interface IEmbeddingService {
 }
 
 export interface IVectorStoreService {
-  addChunks(chunks: EmbeddedChunk[]): void
-  getAllChunks(): EmbeddedChunk[]
-  getChunksBySource(source: string): EmbeddedChunk[]
-  clearAll(): void
-  getStats(): VectorStoreStats
+  addChunks(chunks: EmbeddedChunk[]): Promise<void>
+  getAllChunks(): Promise<EmbeddedChunk[]>
+  getChunksBySource(source: string): Promise<EmbeddedChunk[]>
+  clearAll(): Promise<void>
+  getStats(): Promise<VectorStoreStats>
 }
 
 export interface IRagService {
@@ -76,5 +76,5 @@ export interface IRagService {
     }>
     persona: string
   }>
-  getStats(): VectorStoreStats
+  getStats(): Promise<VectorStoreStats>
 }

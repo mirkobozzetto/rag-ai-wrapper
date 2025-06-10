@@ -45,7 +45,7 @@ export class Ask {
 
   private async getStats(c: Context) {
     try {
-      const stats = this.ragService.getStats()
+      const stats = await this.ragService.getStats()
       return c.json({ success: true, stats })
     } catch (error) {
       console.error('Stats error:', error)

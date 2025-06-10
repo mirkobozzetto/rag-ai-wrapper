@@ -17,6 +17,9 @@ importers:
       '@hono/zod-openapi':
         specifier: ^0.19.8
         version: 0.19.8(hono@4.7.11)(zod@3.25.56)
+      '@qdrant/qdrant-js':
+        specifier: ^1.14.1
+        version: 1.14.1(typescript@5.8.3)
       dotenv:
         specifier: ^16.5.0
         version: 16.5.0
@@ -58,6 +61,22 @@ packages:
     resolution: {integrity: sha512-ioiw+R+gBGAUwmDp+/gJA16tedBivzDaji5wOvWej0ZYDE0CXTSSfJfXbrBIuWKh6JQhuXgNDniJdeDueKUZTA==}
     peerDependencies:
       zod: ^3.20.2
+
+  '@bufbuild/connect-node@0.10.1':
+    resolution: {integrity: sha512-l70tmks+txIzggO+kPkaOQmAapiBavK3rqTGsUTIlwk2nuuq8dUCIBnhbRxgZlyF67pNA1FTzoOucv/A3RteGA==}
+    engines: {node: '>=16.0.0'}
+    deprecated: Connect has moved to its own org @connectrpc and has a stable v1. Run `npx @connectrpc/connect-migrate@latest` to update. See https://github.com/connectrpc/connect-es/releases/tag/v0.13.1 for details.
+    peerDependencies:
+      '@bufbuild/protobuf': ^1.2.1
+
+  '@bufbuild/connect@0.10.1':
+    resolution: {integrity: sha512-rqdZakAdajdSnRO342K7S3gZnUPMYXF2JsUDMA4vpR34SYdWYXiL2mclUMTaUk+EfLK04ulyejNaFAc0e5o8Qw==}
+    deprecated: Connect has moved to its own org @connectrpc and has a stable v1. Run `npx @connectrpc/connect-migrate@latest` to update. See https://github.com/connectrpc/connect-es/releases/tag/v0.13.1 for details.
+    peerDependencies:
+      '@bufbuild/protobuf': ^1.2.1
+
+  '@bufbuild/protobuf@1.10.1':
+    resolution: {integrity: sha512-wJ8ReQbHxsAfXhrf9ixl0aYbZorRuOWpBNzm8pL8ftmSxQx/wnJD5Eg861NwJU/czy2VXFIebCeZnZrI9rktIQ==}
 
   '@esbuild/aix-ppc64@0.25.5':
     resolution: {integrity: sha512-9o3TMmpmftaCMepOdA5k/yDw8SfInyzWWTjYTFCX3kPSDJMROQTb8jg+h9Cnwnmm1vOzvxN7gIfB5V2ewpjtGA==}
@@ -297,6 +316,31 @@ packages:
     resolution: {integrity: sha512-nD6NGa4JbNYSZYsTnLGrqe9Kn/lCkA4ybXt8sx5ojDqZjr2i0TWAHxx/vhgfjX+i3hCdKWufxYwi7CfXqtITSA==}
     engines: {node: '>= 10'}
 
+  '@qdrant/js-client-grpc@1.14.1':
+    resolution: {integrity: sha512-vHp3+AyPKuFzEMmBHSj+2E3i70DDZyKas1dCBr+gtNNz9xrK4htLRZy3OdQoPPq/gV3uSLmVy2BMIsMJe0iW1g==}
+    engines: {node: '>=18.0.0', pnpm: '>=8'}
+    peerDependencies:
+      typescript: '>=4.1'
+
+  '@qdrant/js-client-rest@1.14.1':
+    resolution: {integrity: sha512-CkCCTDc4gCXq+hhjB3yDw9Hs/PxCJ0bKqk/LjAAmuL9+nDm/RPue4C/tGOIMlzouTQ2l6J6t+JPeM//j38VFug==}
+    engines: {node: '>=18.17.0', pnpm: '>=8'}
+    peerDependencies:
+      typescript: '>=4.7'
+
+  '@qdrant/openapi-typescript-fetch@1.2.6':
+    resolution: {integrity: sha512-oQG/FejNpItrxRHoyctYvT3rwGZOnK4jr3JdppO/c78ktDvkWiPXPHNsrDf33K9sZdRb6PR7gi4noIapu5q4HA==}
+    engines: {node: '>=18.0.0', pnpm: '>=8'}
+
+  '@qdrant/qdrant-js@1.14.1':
+    resolution: {integrity: sha512-NHSOA0oryAbGo+1IfMcur+OEH67r/kLe9VieIF4+Xe2KZLADDQ2cHjB0V+VkOxiIQNNCe67bVHLwWEbSS3LSiw==}
+    engines: {node: '>=18.17.0', pnpm: '>=8'}
+    peerDependencies:
+      typescript: '>=4.1'
+
+  '@sevinf/maybe@0.5.0':
+    resolution: {integrity: sha512-ARhyoYDnY1LES3vYI0fiG6e9esWfTNcXcO6+MPJJXcnyMV3bim4lnFt45VXouV7y82F4x3YH8nOQ6VztuvUiWg==}
+
   '@types/node@20.17.57':
     resolution: {integrity: sha512-f3T4y6VU4fVQDKVqJV4Uppy8c1p/sVvS3peyqxyWnzkqXFJLRU7Y1Bl7rMS1Qe9z0v4M6McY0Fp9yBsgHJUsWQ==}
 
@@ -331,6 +375,9 @@ packages:
 
   get-tsconfig@4.10.1:
     resolution: {integrity: sha512-auHyJ4AgMz7vgS8Hp3N6HXSmlMdUyhSUrfBF16w153rxtLIEOE+HGqaBppczZvnHLqQJfiHotCYpNhl0lUROFQ==}
+
+  headers-polyfill@3.3.0:
+    resolution: {integrity: sha512-5e57etwBpNcDc0b6KCVWEh/Ro063OxPvzVimUdM0/tsYM/T7Hfy3kknIGj78SFTOhNd8AZY41U8mOHoO4LzmIQ==}
 
   hono@4.7.11:
     resolution: {integrity: sha512-rv0JMwC0KALbbmwJDEnxvQCeJh+xbS3KEWW5PC9cMJ08Ur9xgatI0HmtgYZfOdOSOeYsp5LO2cOhdI8cLEbDEQ==}
@@ -391,6 +438,10 @@ packages:
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
 
+  undici@6.21.3:
+    resolution: {integrity: sha512-gBLkYIlEnSp8pFbT64yFgGE6UIB9tAkhukC23PmMDCe5Nd+cRqKxSjw5y54MK2AZMgZfJWMaNE4nYUHgi1XEOw==}
+    engines: {node: '>=18.17'}
+
   yaml@2.8.0:
     resolution: {integrity: sha512-4lLa/EcQCB0cJkyts+FpIRx5G/llPxfP6VQU5KByHEhLxY3IJCH0f0Hy1MHI8sClTvsIb8qwRJ6R/ZdlDJ/leQ==}
     engines: {node: '>= 14.6'}
@@ -405,6 +456,18 @@ snapshots:
     dependencies:
       openapi3-ts: 4.4.0
       zod: 3.25.56
+
+  '@bufbuild/connect-node@0.10.1(@bufbuild/protobuf@1.10.1)':
+    dependencies:
+      '@bufbuild/connect': 0.10.1(@bufbuild/protobuf@1.10.1)
+      '@bufbuild/protobuf': 1.10.1
+      headers-polyfill: 3.3.0
+
+  '@bufbuild/connect@0.10.1(@bufbuild/protobuf@1.10.1)':
+    dependencies:
+      '@bufbuild/protobuf': 1.10.1
+
+  '@bufbuild/protobuf@1.10.1': {}
 
   '@esbuild/aix-ppc64@0.25.5':
     optional: true
@@ -545,6 +608,30 @@ snapshots:
       '@napi-rs/canvas-win32-x64-msvc': 0.1.70
     optional: true
 
+  '@qdrant/js-client-grpc@1.14.1(typescript@5.8.3)':
+    dependencies:
+      '@bufbuild/connect': 0.10.1(@bufbuild/protobuf@1.10.1)
+      '@bufbuild/connect-node': 0.10.1(@bufbuild/protobuf@1.10.1)
+      '@bufbuild/protobuf': 1.10.1
+      typescript: 5.8.3
+
+  '@qdrant/js-client-rest@1.14.1(typescript@5.8.3)':
+    dependencies:
+      '@qdrant/openapi-typescript-fetch': 1.2.6
+      '@sevinf/maybe': 0.5.0
+      typescript: 5.8.3
+      undici: 6.21.3
+
+  '@qdrant/openapi-typescript-fetch@1.2.6': {}
+
+  '@qdrant/qdrant-js@1.14.1(typescript@5.8.3)':
+    dependencies:
+      '@qdrant/js-client-grpc': 1.14.1(typescript@5.8.3)
+      '@qdrant/js-client-rest': 1.14.1(typescript@5.8.3)
+      typescript: 5.8.3
+
+  '@sevinf/maybe@0.5.0': {}
+
   '@types/node@20.17.57':
     dependencies:
       undici-types: 6.19.8
@@ -598,6 +685,8 @@ snapshots:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
+  headers-polyfill@3.3.0: {}
+
   hono@4.7.11: {}
 
   ms@2.1.3: {}
@@ -643,6 +732,8 @@ snapshots:
   typescript@5.8.3: {}
 
   undici-types@6.19.8: {}
+
+  undici@6.21.3: {}
 
   yaml@2.8.0: {}
 

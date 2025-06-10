@@ -44,7 +44,7 @@ export class RagService implements IRagService {
 
     const embeddedChunks = await this.embeddingService.embedChunks(chunks)
 
-    this.vectorStore.addChunks(embeddedChunks)
+    await this.vectorStore.addChunks(embeddedChunks)
 
     return {
       filename,
@@ -61,7 +61,7 @@ export class RagService implements IRagService {
       similarity: number
     }>
   }> {
-    const allChunks = this.vectorStore.getAllChunks()
+    const allChunks = await this.vectorStore.getAllChunks()
 
     if (allChunks.length === 0) {
       return {
@@ -105,7 +105,7 @@ export class RagService implements IRagService {
     }
   }
 
-  getStats(): VectorStoreStats {
-    return this.vectorStore.getStats()
+  async getStats(): Promise<VectorStoreStats> {
+    return await this.vectorStore.getStats()
   }
 }
