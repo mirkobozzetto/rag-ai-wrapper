@@ -5,7 +5,7 @@ description = "RAG with FastAPI + Qdrant + FastEmbed"
 requires-python = ">=3.12"
 
 dependencies = [
-    "fastapi>=0.104.0",
+    "fastapi[standard]>=0.104.0",
     "hypercorn>=0.14.0",
     "pydantic>=2.0.0",
 ]
