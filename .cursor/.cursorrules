@@ -1,0 +1,76 @@
+---
+description: "Python RAG application development with uv + FastAPI + LangChain + Qdrant + FastEmbed"
+globs: ["*.py", "**/*.py", "*.md", "*.yaml", "*.yml", "pyproject.toml"]
+alwaysApply: true
+---
+
+# Python RAG Application Development Rules
+
+## Project Context
+
+You are working on a production RAG (Retrieval-Augmented Generation) application using:
+
+- **uv** for package management (NOT pip or poetry)
+- **FastAPI** for REST API with async patterns
+- **LangChain** for RAG orchestration and chains
+- **Qdrant** for vector storage with production optimizations
+- **FastEmbed** for local embeddings (BAAI/bge-small-en-v1.5)
+- **Pydantic** for data validation and settings
+- **Python 3.12.5** features and type hints
+
+## Code Standards
+
+- Use explicit type hints for ALL function parameters and return values
+- Follow async/await patterns for ALL I/O operations
+- Implement comprehensive error handling with custom exception hierarchies
+- Use Pydantic models for ALL API request/response schemas
+- Write comprehensive docstrings (Google style)
+- Use `from __future__ import annotations` for forward references
+- Never use `any` types - always specify concrete types
+
+## Architecture Patterns
+
+- Dependency injection using Protocol classes for type safety
+- Repository pattern for data access layers
+- Factory pattern for service initialization
+- Clean separation: API → Services → Core → Infrastructure
+- Event-driven patterns for document processing
+- Circuit breaker pattern for external API calls
+
+## Package Management (CRITICAL)
+
+- Use **uv exclusively** for all dependency management
+- ALL Python commands MUST use `uv run` prefix
+- Install dependencies: `uv add <package>`
+- Development tools: `uv add --dev <tool>`
+- Never use pip, pipenv, or poetry
+- Use dependency groups: `[project.optional-dependencies]`
+
+## Error Handling
+
+- Create custom exception classes inheriting from base exceptions
+- Implement async-compatible error handling with proper logging
+- Use structured logging with correlation IDs
+- Log errors with full context and stack traces
+- Handle timeout exceptions for all external services
+
+## Performance & Async Patterns
+
+- Use async/await consistently throughout the entire application
+- Implement connection pooling for Qdrant and external services
+- Use background tasks for non-blocking operations
+- Batch operations where possible (embedding generation, vector upserts)
+- Monitor and log query performance metrics
+
+## File Organization
+
+- Group related functionality in clear modules
+- Use `__init__.py` files for clean imports
+- Keep business logic separate from API routes
+- Use dependency injection for testability
+- Follow the established project structure
+
+@pyproject.toml
+@README.md
+@src/
+@.cursor/rules/

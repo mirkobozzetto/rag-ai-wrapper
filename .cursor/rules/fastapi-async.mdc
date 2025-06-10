@@ -1,0 +1,92 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+---
+description: "FastAPI async patterns and API development best practices"
+globs: ["**/api/**/*.py", "**/routes/**/*.py", "**/middleware/**/*.py"]
+alwaysApply: false
+---
+
+# FastAPI Async Development Patterns
+
+## Route Definition Standards
+- Use APIRouter with clear prefixes and tags
+- Define comprehensive Pydantic models for ALL requests/responses
+- Use dependency injection with Annotated types
+- Implement proper HTTP status codes and error responses
+- Add comprehensive OpenAPI documentation
+- Use background tasks for non-blocking operations
+
+## Async Patterns
+- ALL route functions MUST be async
+- Use async context managers for resource management
+- Implement proper connection pooling for databases
+- Handle async exceptions with proper error propagation
+- Use asyncio.gather() for concurrent operations
+- Avoid blocking calls in async functions
+
+## Dependency Injection
+- Use Protocol classes for type-safe dependency injection
+- Implement proper lifespan management for resources
+- Use FastAPI's Depends() with clear type annotations
+- Create reusable dependency factories
+- Implement proper cleanup in dependency teardown
+- Use request-scoped dependencies where appropriate
+
+## Request/Response Handling
+- Validate ALL inputs with Pydantic models
+- Use proper HTTP methods (GET, POST, PUT, DELETE, PATCH)
+- Implement consistent error response schemas
+- Use status codes appropriately (200, 201, 400, 404, 500)
+- Add request/response examples in OpenAPI docs
+- Handle file uploads with proper validation
+
+## Streaming Responses
+- Use StreamingResponse for large data
+- Implement Server-Sent Events (SSE) for real-time updates
+- Handle client disconnections gracefully
+- Use proper content types and headers
+- Implement backpressure handling
+- Add proper error handling in streams
+
+## Middleware Patterns
+- Implement request ID tracking for correlation
+- Add comprehensive logging middleware
+- Use CORS middleware with proper configuration
+- Implement rate limiting middleware
+- Add security headers middleware
+- Handle exceptions with proper error formatting
+
+## Authentication & Security
+- Use dependency injection for auth validation
+- Implement proper JWT token handling
+- Add API key validation where needed
+- Use HTTPBearer for token authentication
+- Implement proper RBAC patterns
+- Validate all user inputs for security
+
+## Performance Optimization
+- Use connection pooling for all external services
+- Implement response caching where appropriate
+- Use background tasks for heavy operations
+- Monitor response times and optimize slow endpoints
+- Use async database connections
+- Implement proper request/response compression
+
+## Error Handling
+- Create custom exception handlers
+- Use HTTPException with proper status codes
+- Implement consistent error response format
+- Log errors with proper context and correlation IDs
+- Handle validation errors gracefully
+- Provide meaningful error messages to clients
+
+## Testing Patterns
+- Use async test clients (TestClient or httpx.AsyncClient)
+- Mock external dependencies properly
+- Test both success and error scenarios
+- Use dependency overrides for testing
+- Test middleware and security components
+- Implement proper test data factories

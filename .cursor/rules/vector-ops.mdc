@@ -1,0 +1,86 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+---
+description: "Qdrant vector database operations and optimization patterns"
+globs: ["**/vector_store/**/*.py", "**/qdrant*.py", "**/embeddings/**/*.py"]
+alwaysApply: false
+---
+
+# Vector Database Operations
+
+## Qdrant Client Configuration
+- Use QdrantClient with proper timeout settings (30-60 seconds)
+- Implement connection pooling with Semaphore for concurrent operations
+- Use async context managers for connection lifecycle
+- Configure proper retry logic with exponential backoff
+- Handle connection failures with circuit breaker pattern
+- Use prefer_grpc=True for better performance
+
+## Collection Management
+- Create collections with optimal vector parameters:
+  - size=384 for FastEmbed BAAI/bge-small-en-v1.5
+  - distance=Cosine for semantic similarity
+  - on_disk=True for large datasets
+- Configure HNSW indexing (m=16, ef_construct=100)
+- Enable scalar quantization (INT8) for memory optimization
+- Set proper segment settings for performance
+- Use payload indexing for filtered searches
+
+## Vector Operations
+- Batch upsert operations for better performance (100-1000 vectors)
+- Use proper point IDs (UUID or meaningful strings)
+- Implement proper metadata schema in payloads
+- Handle vector dimension mismatches gracefully
+- Use scroll API for large result sets
+- Implement proper error handling for vector operations
+
+## Search Optimization
+- Use hybrid search (dense + sparse) when possible
+- Implement MMR (Maximal Marginal Relevance) for result diversity
+- Use proper search parameters (limit, offset, score_threshold)
+- Filter by payload fields to improve relevance
+- Use vector search with proper similarity thresholds
+- Implement result re-ranking for better precision
+
+## FastEmbed Integration
+- Use BAAI/bge-small-en-v1.5 model for consistency
+- Set max_length=512 for optimal performance
+- Cache model loading to avoid initialization overhead
+- Batch embedding generation for multiple texts
+- Handle embedding errors gracefully
+- Use proper text preprocessing for embeddings
+
+## Performance Patterns
+- Use connection pooling for concurrent operations
+- Implement proper timeout handling
+- Batch operations where possible
+- Use async operations throughout
+- Monitor query performance and optimize
+- Cache frequent search results
+
+## Error Handling
+- Handle Qdrant-specific exceptions properly
+- Implement retry logic for transient failures
+- Log vector operations with proper context
+- Handle timeout exceptions gracefully
+- Validate vector dimensions before operations
+- Use proper error messages for debugging
+
+## Data Management
+- Implement proper backup strategies
+- Use collection aliases for zero-downtime updates
+- Handle large-scale data ingestion efficiently
+- Implement proper data versioning
+- Monitor collection sizes and performance
+- Use proper cleanup for old vectors
+
+## Monitoring & Metrics
+- Track query latency and throughput
+- Monitor collection sizes and memory usage
+- Log slow queries for optimization
+- Track embedding generation performance
+- Monitor error rates and types
+- Implement health checks for vector operations

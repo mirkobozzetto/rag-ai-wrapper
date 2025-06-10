@@ -1,0 +1,76 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+---
+description: "RAG-specific development patterns and best practices"
+globs: ["**/rag_*.py", "**/retrieval/*.py", "**/embeddings/*.py", "**/vector_store/*.py"]
+alwaysApply: false
+---
+
+# RAG Development Patterns
+
+## Vector Operations
+- Use Qdrant client with proper connection pooling and timeouts
+- Implement proper vector indexing with HNSW and quantization settings
+- Use FastEmbed with BAAI/bge-small-en-v1.5 (384 dimensions)
+- Handle embedding dimension mismatches gracefully
+- Implement batch processing for large document sets
+- Use semantic search with MMR (Maximal Marginal Relevance) for diversity
+
+## Document Processing Pipeline
+- Chunk documents into 500-1000 tokens with 50-100 token overlap
+- Use RecursiveCharacterTextSplitter for general text
+- Implement semantic chunking for large documents (LangChain SemanticChunker)
+- Add proper metadata tracking for source attribution and citations
+- Handle different document formats (PDF, DOCX, HTML, Markdown)
+- Preserve document structure and hierarchy in metadata
+
+## LangChain Integration Patterns
+- Use LCEL (LangChain Expression Language) for chain composition
+- Implement proper callback handlers for streaming and monitoring
+- Use async methods (ainvoke, astream, abatch) for ALL LLM calls
+- Implement proper prompt templates with variable injection
+- Use RunnableParallel for concurrent operations
+- Handle chain failures with proper error recovery
+
+## Embedding Management
+- Cache embeddings to avoid redundant API calls
+- Use FastEmbed for consistent local embedding generation
+- Implement embedding versioning for model updates
+- Handle embedding dimension consistency across models
+- Use batch embedding generation for performance
+- Monitor embedding quality and consistency
+
+## Retrieval Strategies
+- Implement hybrid search (dense + sparse vectors)
+- Use contextual compression for better relevance
+- Implement re-ranking for improved precision
+- Use ensemble retrieval for robustness
+- Handle edge cases (no results, low similarity scores)
+- Implement proper citation and source tracking
+
+## Response Generation
+- Stream responses for better user experience
+- Implement proper context window management
+- Use structured outputs where appropriate
+- Handle hallucination detection and mitigation
+- Implement response validation and quality checks
+- Add proper source attribution in responses
+
+## Performance Optimization
+- Implement async document processing pipelines
+- Use connection pooling for all external services
+- Cache frequent queries and responses
+- Monitor and optimize query latency
+- Implement proper rate limiting for external APIs
+- Use background tasks for non-critical operations
+
+## Error Handling & Monitoring
+- Create RAG-specific exception hierarchies
+- Log all queries, retrievals, and generations
+- Monitor embedding quality and drift
+- Track retrieval accuracy and relevance
+- Implement circuit breakers for external dependencies
+- Add comprehensive health checks for all components

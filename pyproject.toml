@@ -1,0 +1,24 @@
+[project]
+name = "rag-project"
+version = "0.1.0"
+description = "RAG with FastAPI + Qdrant + FastEmbed"
+requires-python = ">=3.12"
+
+dependencies = [
+    "fastapi>=0.104.0",
+    "hypercorn>=0.14.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I"]
